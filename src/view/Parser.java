@@ -70,6 +70,8 @@ public class Parser {
 
                 creditCardNumber = new CreditCardDTO(1234, "SKJG122344JIF", "Nino Prekratic" ,  YearMonth.parse("2020-12"), 174);
                 printView.printMessage("Credit card input successfully!");
+                correctNumber = false;
+
             } else {
                 printView.printMessage("Please press number 1");
             }
@@ -91,7 +93,7 @@ public class Parser {
             if (inspectionResult.equals("pass") || inspectionResult.equals("fail")) {
                 success = true;
             } else {
-                printView.printMessage("Your input is wrong. \n Accepted values are **pass** or **fail**");
+                printView.printMessage("Your input is wrong.");
             }
         }
 

@@ -73,6 +73,7 @@ public class View {
             case COST:
                 printView.printMessage("The inspection cost is: ");
                 getInspectionCost();
+                printView.printMessage(String.valueOf(cost));
                 break;
 
             case PAY:
