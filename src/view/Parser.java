@@ -39,88 +39,37 @@ public class Parser {
         return new Command(commands.getCommandWord(word1));
     }
 
-    /**
-     * Analyses the <code>Command</code> received from the user and calls appropriate function.
-     *
-     * @param command - command inputted by the user.
-     * @return If the <code>quit</code> command is detected returns <code>true</code>, if not returns <code>false<code/>.
-     */
-
-    public boolean processCommand(Command command) {
-
-        boolean wantToQuit = false;
-
-        CommandWord commandWord = command.getCommandWord();
-
-        switch (commandWord) {
-
-            case UNKNOWN:
-                printView.printMessage("This is unknown");
-                break;
-
-            case NEXT:
-                printView.printMessage("Start new inspection!");
-                break;
-
-            case OPEN:
-                printView.printMessage("Open the door.");
-
-                break;
-
-            case CLOSE:
-                printView.printMessage("Close the door.");
-
-                break;
-
-            case QUIT:
-                wantToQuit = quit(command);
-                break;
-        }
-        return wantToQuit;
-    }
-
-    /**
-     * Performs <code>quit</code> command and quits the application
-     *
-     * @param command - receives <code>quit</code> command
-     * @return true if it is only <code>quit</code> command
-     */
-
-    private boolean quit(Command command) {
-
-            return true;
-
-    }
-
-    /**
-     * Prints out welcome message
-     */
-
-    public void getPrintStart() {
-
-        printView.printMessage("Welcome to THE BEST CAR INSPECTION  app");
-        printView.printMessage("---------------------------------------");
-    }
-
-    /**
-     * Prints out quit message
-     */
-
-    public void getPrintExit() {
-
-        printView.printMessage("Thank for using THE BEST CAR INSPECTION app");
-        printView.printMessage("-------------------------------");
-    }
-
-    /**
-     * Prints out all valid commands
-     */
-
-    public void showCommands() {
-
-        printView.printMessage("Available commands are: ");
-        System.out.println();
-
+    public void getAllCommands () {
         commands.showAll();
     }
+
+    public String getInspectionNumber () {
+        String regNumber;
+
+        printView.printInput("Please enter a valid registration number.");
+
+        return regNumber = reader.nextLine();
+    }
+
+    public CreditCardDTO getCreditCardNumber () {
+
+        String creditCardNumber;
+        boolean correctNumber = true;
+
+        while (correctNumber) {
+
+            printView.printInput("Please enter your credit card number. \n Press number 1!");
+
+            creditCardNumber = reader.nextLine();
+
+            if (creditCardNumber.equals("1")) {
+                return new CrediCardDTO(1234, "SKJG122344JIF", 1200.54 , "12/04/2020", 174);
+            } else {
+                printView.printMessage("Please press number 1");
+            }
+        }
+
+
+    }
+
 }
