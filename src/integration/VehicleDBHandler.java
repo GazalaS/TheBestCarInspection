@@ -23,7 +23,7 @@ import java.util.List;
 public class VehicleDBHandler {
     
     private List<InspectionInfoDTO> inspectionChecklist;
-    private static final String INSPECTION_CHECKLIST_FILE = "inspectionchecklist.txt";
+    private static String INSPECTION_CHECKLIST_FILE = "inspectionchecklist.txt";
     
     /**
      * 
@@ -39,6 +39,7 @@ public class VehicleDBHandler {
      */
     public List<InspectionInfoDTO> getInspectionChecklist(String regNumber)throws IOException {
         // Make sure the file can be found.
+        INSPECTION_CHECKLIST_FILE = regNumber + INSPECTION_CHECKLIST_FILE;
         Charset charset = Charset.forName("US-ASCII");
         Path path = Paths.get(INSPECTION_CHECKLIST_FILE);
         try (BufferedReader reader = Files.newBufferedReader(path, charset)) {
@@ -71,6 +72,7 @@ public class VehicleDBHandler {
      * @throws IOException 
      */
     public void saveInspectionChecklist(String regNumber, List<InspectionInfoDTO> inspectionChecklist) throws IOException{
+        INSPECTION_CHECKLIST_FILE = regNumber + INSPECTION_CHECKLIST_FILE;
         Path resultsFile = Paths.get(INSPECTION_CHECKLIST_FILE).toAbsolutePath();
         FileWriter writer = new FileWriter(resultsFile.toString());
         for(InspectionInfoDTO details : inspectionChecklist) {
