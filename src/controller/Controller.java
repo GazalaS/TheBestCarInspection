@@ -52,9 +52,9 @@ public class Controller {
      * @param creditCard Customers credit card information.
      * @return
      */
-    public boolean authorizePayment(CreditCardDTO creditCard, int amount) {
+    public boolean authorizePayment(CreditCardDTO creditCard, double cost) {
         CreditCardProcessingUnit creditCardProcessingUnit = new CreditCardProcessingUnit();
-        return creditCardProcessingUnit.authorizePayment(creditCard, amount);
+        return creditCardProcessingUnit.authorizePayment(creditCard, cost);
     }
 
     /**
