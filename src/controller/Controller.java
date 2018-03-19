@@ -1,4 +1,5 @@
-package se.kth.sda.controller;
+package controller;
 
 public class Controller {
+
 }
