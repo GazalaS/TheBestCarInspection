@@ -18,22 +18,24 @@ public class Controller {
      */    
     public Controller() {
         garageManager = new GarageManager();
-        inspectionManager = new InspectionManager();
-        printer = new Printer();                
+        printer = new Printer();
+        inspectionManager = new InspectionManager(printer);                      
     }
     
     /**
-     * 
+     * Calls the next customer method from the garage manager, then waits 3 sec
+     * and closes the door after the customer is in the garage.
      */
     public void startNewInspection{
         garageManager.nextCustomer();
-        
+        Thread.sleep(3000);
         garageManager.closeDoor();
     }
     
     /**
-     * 
-     * @param regNumber
+     * Gets cost of the inspection baset on the list of inspection that is 
+     * provided based on the registration number.
+     * @param regNumber Registration
      * @return 
      */
     public double getInspectionCost(String regNumber){
@@ -47,7 +49,7 @@ public class Controller {
      */
     public boolean authorisePayment(CreditCardDTO creditCard){        
         CreditCardProcessingUnit creditCardProcessingUnit = new CreditCardProcessingUnit;   //???
-        return creditCardProcessingUnit.authorisePayment();        
+        return creditCardProcessingUnit.authorisePayment(creditCard);        
     }    
         
     /**
@@ -55,7 +57,7 @@ public class Controller {
      * @return 
      */
     public String getNextInspection(){
-        inspectionManager.getNextInspection()
+        return inspectionManager.getNextInspection();        
     }
     
     /**
@@ -63,7 +65,7 @@ public class Controller {
      * @param result 
      */
     public void enterInspectionResult(String result){
-        inspectionManager.enterInspectionnResult();
+        inspectionManager.enterInspectionnResult(result);
     }
     
     /**
@@ -87,7 +89,7 @@ public class Controller {
      * @param regNumber 
      */
     public void saveInspectionResult(String regNumber){
-        inspectionManager.saveinspectionResult();
+        inspectionManager.saveInspectionResult(regNumber);
     }
     
     /**
