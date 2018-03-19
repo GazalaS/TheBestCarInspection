@@ -1,6 +1,8 @@
 package view;
 
 import controller.Controller;
+import integration.CreditCardDTO;
+import integration.ReceiptDTO;
 
 public class View {
 
@@ -63,12 +65,24 @@ public class View {
 
             case OPEN:
                 printView.printMessage("Open the door.");
+                break;
 
+            case COST:
+                printView.printMessage("The inspection cost is: ");
+                getInspectionCost();
+                break;
+
+            case PAY:
+                printView.printMessage("Credit card payment.");
+                getInspectionCost();
                 break;
 
             case CLOSE:
                 printView.printMessage("Close the door.");
 
+            case HELP:
+                printView.printMessage("This is help");
+                parser.getAllCommands();
                 break;
 
             case QUIT:
@@ -134,19 +148,22 @@ public class View {
     }
 
     private void getInspectionCost () {
-        inspectionCost = controller.getInspectionCost();
+        inspectionCost = controller.getInspectionCost(regNumber);
     }
 
-    private boolean paymentByCreditCard () {
-        String creditCardNumber;
-
-
-
+    private void paymentByCreditCard () {
+        CreditCardDTO creditCardNumber = parser.getCreditCardNumber();
         cardAuthoriztion = controller.authorizePayment(creditCardNumber);
-    }
+        ReceiptDTO receipt = new ReceiptDTO(inspectionCost, );
 
     private void inspection () {
+        if (cardAuthoriztion) {
+            printView.printMessage("The inspection can procede");
 
+
+        } else {
+            printView.printMessage("The inspection is not authorized!");
+        }
 
     }
 

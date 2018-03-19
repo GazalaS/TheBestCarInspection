@@ -21,8 +21,7 @@ public class Printer {
         System.out.println("RegNumber:" + receipt.getRegNumber());
         System.out.println("ReceiptDate:" + receipt.getReceiptDate());
         System.out.println("Cost:" + receipt.getCost());
-        System.out.println("Amount:" + receipt.getAmount());
-        System.out.println("Change:" + receipt.getChange());
+      
     }
 
     /**

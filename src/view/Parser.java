@@ -1,5 +1,8 @@
 package view;
 
+import integration.CreditCardDTO;
+
+import java.time.YearMonth;
 import java.util.Scanner;
 
 public class Parser {
@@ -53,23 +56,25 @@ public class Parser {
 
     public CreditCardDTO getCreditCardNumber () {
 
-        String creditCardNumber;
+        CreditCardDTO creditCardNumber = null;
+        String creditCardNumberInput;
         boolean correctNumber = true;
 
         while (correctNumber) {
 
             printView.printInput("Please enter your credit card number. \n Press number 1!");
 
-            creditCardNumber = reader.nextLine();
+            creditCardNumberInput = reader.nextLine();
 
-            if (creditCardNumber.equals("1")) {
-                return new CrediCardDTO(1234, "SKJG122344JIF", 1200.54 , "12/04/2020", 174);
+            if (creditCardNumberInput.equals("1")) {
+
+                creditCardNumber = new CreditCardDTO(1234, "SKJG122344JIF", "Nino Prekratic" ,  YearMonth.parse("2020-12"), 174);
+                printView.printMessage("Credit card input successfully!");
             } else {
                 printView.printMessage("Please press number 1");
             }
         }
-
-
+        return creditCardNumber;
     }
 
 }
