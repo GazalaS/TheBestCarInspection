@@ -3,15 +3,21 @@ package controller;
 import integration.CreditCardDTO;
 import integration.CreditCardProcessingUnit;
 import integration.ReceiptDTO;
+<<<<<<< HEAD
 import javafx.print.Printer;
 import model.GarageManager;
 import model.InspectionManager;
 i
+=======
+import integration.Printer;
+import integration.Garage;
+import model.InspectionManager;
+>>>>>>> 916d23027ba9ff53787bce8a612a7a19dc5387e7
 
 
 public class Controller {    
     
-    private GarageManager garageManager;
+    private Garage garage;
     private InspectionManager inspectionManager;
     private Printer printer;
     private CreditCardProcessingUnit creditCardProcessingUnit;
@@ -21,7 +27,7 @@ public class Controller {
      * to inspectionManager object.
      */    
     public Controller() {
-        garageManager = new GarageManager();
+        garage = new Garage();
         printer = new Printer();
         inspectionManager = new InspectionManager(printer);                      
     }
@@ -30,10 +36,15 @@ public class Controller {
      * Calls the next customer method from the garage manager, then waits 3 sec
      * and closes the door after the customer is in the garage.
      */
+<<<<<<< HEAD
     public void startNewInspection () {
         garageManager.nextCustomer();
+=======
+    public void startNewInspection(){
+        garage.nextCustomer();
+>>>>>>> 916d23027ba9ff53787bce8a612a7a19dc5387e7
         Thread.sleep(3000);
-        garageManager.closeDoor();
+        garage.closeDoor();
     }
     
     /**

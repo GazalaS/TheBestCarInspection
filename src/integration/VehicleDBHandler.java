@@ -22,15 +22,14 @@ import java.util.List;
  */
 public class VehicleDBHandler {
     
-    private List<InspectionInfoDTO> inspectionCheckList;
+    private List<InspectionInfoDTO> inspectionChecklist;
     private static final String INSPECTION_CHECKLIST_FILE = "inspectionchecklist.txt";
     
     /**
      * 
      */
     public VehicleDBHandler(){
-        inspectionCheckList = new ArrayList<InspectionInfoDTO>();
-        
+        inspectionChecklist = new ArrayList<InspectionInfoDTO>();        
     }
     
     /**
@@ -38,7 +37,7 @@ public class VehicleDBHandler {
      * @return
      * @throws IOException 
      */
-    private List<InspectionInfoDTO> getInspectionChecklist()throws IOException {
+    public List<InspectionInfoDTO> getInspectionChecklist(String regNumber)throws IOException {
         // Make sure the file can be found.
         Charset charset = Charset.forName("US-ASCII");
         Path path = Paths.get(INSPECTION_CHECKLIST_FILE);
@@ -50,7 +49,7 @@ public class VehicleDBHandler {
                                                      sections[0],
                                                      Double.parseDouble(sections[1]),
                                                       Boolean.parseBoolean(sections[2]));
-                inspectionCheckList.add(inspectionInfo);
+                inspectionChecklist.add(inspectionInfo);
                 details = reader.readLine();
             }
         }
@@ -63,23 +62,22 @@ public class VehicleDBHandler {
                                INSPECTION_CHECKLIST_FILE);
         }
     
-        return inspectionCheckList;
+        return inspectionChecklist;
     }
+    
     /**
      * Saves the inspection list
-     * @param inspectionCheckList
+     * @param inspectionChecklist
      * @throws IOException 
      */
-    private void saveInspectionCheckList(List<InspectionInfoDTO> inspectionCheckList) throws IOException{
+    public void saveInspectionChecklist(String regNumber, List<InspectionInfoDTO> inspectionChecklist) throws IOException{
         Path resultsFile = Paths.get(INSPECTION_CHECKLIST_FILE).toAbsolutePath();
         FileWriter writer = new FileWriter(resultsFile.toString());
-        for(InspectionInfoDTO details : inspectionCheckList) {
+        for(InspectionInfoDTO details : inspectionChecklist) {
             writer.write(details.getInspectionInformation()+","+details.getPrice()+","+details.getInspectionResult());
             writer.write('\n');
         }
         writer.close();
-    }
-    
-   
+    }  
 }
 

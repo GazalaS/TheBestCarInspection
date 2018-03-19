@@ -1,21 +1,20 @@
 package model;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 import integration.InspectionInfoDTO;
-import integration.VehicleDBHandler;
 import integration.Printer;
+import integration.VehicleDBHandler;
 
 /**
  * Inspection Manger manage tasks related to the inspection of a vehicle. An
  * inspection manager object will manager inspection cost, updating the
  * inspection result and providing inspection report details.
  * 
- * @author aaronsum
- *
  */
 public class InspectionManager {
-	private List<InspectionInfoDTO> inspectionCheckList;
+	private List<InspectionInfoDTO> inspectionChecklist;
 	private VehicleDBHandler vehicleDB;
 	private Printer printer;
 	private double inpsectionCost;
@@ -28,7 +27,7 @@ public class InspectionManager {
 	 *            Printer object for printing of receipt and inspection report.
 	 */
 	public InspectionManager(Printer printer) {
-		vehicleDB = new VihicleDBHandler();
+		vehicleDB = new VehicleDBHandler();
 		this.printer = printer;
 		inspectionCheckListIndexTracker = 0;
 	}
@@ -39,14 +38,18 @@ public class InspectionManager {
 	 * @param regNumber
 	 *            Registration number of the specify vehicle.
 	 * @return The inspection cost for the specify vehicle.
+	 * @throws IOException 
 	 */
-	public double getInspectionCost(String regNumber) {
-		inspectionCheckList = vehicleDB.getInspectionCheckList(regNumber);
+	public double getInspectionCost(String regNumber) throws IOException {
+		inspectionChecklist = vehicleDB.getInspectionChecklist(regNumber);
 		calculateInspectionCost();
+		return inpsectionCost;
 	}
 
 	private void calculateInspectionCost() {
-		inspectionCost = inspectionCheckList.stream().map(item -> item.getPrice()).reduce(0, Double::sum);
+		this.inpsectionCost = inspectionChecklist.stream()
+										.map(item -> item.getPrice())
+										.reduce(0.0, Double::sum);
 	}
 
 	/**
@@ -55,7 +58,7 @@ public class InspectionManager {
 	 * @return True if there is inspection to be done.
 	 */
 	public boolean hasNextInspection() {
-		if (inspectionCheckListIndexTracker < inspectionCheckList.size()) {
+		if (inspectionCheckListIndexTracker < inspectionChecklist.size()) {
 			return true;
 		}
 		return false;
@@ -67,7 +70,7 @@ public class InspectionManager {
 	 * @return The description of inspection.
 	 */
 	public String getNextInspection() {
-		String nextInspectionItem = inspectionCheckList.get(inspectionCheckListIndexTracker);
+		String nextInspectionItem = inspectionChecklist.get(inspectionCheckListIndexTracker).getInspectionInformation();
 		inspectionCheckListIndexTracker++;
 		return nextInspectionItem;
 	}
@@ -80,7 +83,7 @@ public class InspectionManager {
 	 */
 	public void enterInspectionResult(String result) {
 		boolean isPass = (result.toLowerCase().equals(result.toLowerCase())) ? true : false;
-		inspectionCheckList.get(inspectionCheckListIndexTracker - 1).setInspectionResult(isPass);
+		inspectionChecklist.get(inspectionCheckListIndexTracker - 1).setInspectionResult(isPass);
 	}
 
 	/**
@@ -89,9 +92,10 @@ public class InspectionManager {
 	 * 
 	 * @param regNumber
 	 *            Registration number of the vehicle.
+	 * @throws IOException 
 	 */
-	public void saveInspectionResult(String regNumber) {
-		vehicleDB.saveInspectionCheckList(regNumber, inspectionCheckList);
+	public void saveInspectionResult(String regNumber) throws IOException {
+		vehicleDB.saveInspectionChecklist(regNumber, inspectionChecklist);
 	}
 
 	/**
@@ -99,7 +103,7 @@ public class InspectionManager {
 	 * inspection.
 	 */
 	public void printInspectionResult() {
-		List<InspectionInfoDTO> inpsectionResult = inspectionCheckList.stream()
+		List<InspectionInfoDTO> inpsectionResult = inspectionChecklist.stream()
 				.filter(item -> item.getInspectionResult() == false).collect(Collectors.toList());
 		printer.printInspectionResult(inpsectionResult);
 	}
