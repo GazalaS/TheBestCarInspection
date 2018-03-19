@@ -52,7 +52,7 @@ public class Controller {
      * @param creditCard Customers credit card information.
      * @return
      */
-    public boolean authorisePayment(CreditCardDTO creditCard, int amount) {
+    public boolean authorizePayment(CreditCardDTO creditCard, int amount) {
         CreditCardProcessingUnit creditCardProcessingUnit = new CreditCardProcessingUnit();
         return creditCardProcessingUnit.authorizePayment(creditCard, amount);
     }

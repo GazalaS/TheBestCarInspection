@@ -14,7 +14,7 @@ public class CreditCardProcessingUnit {
      * <code>false</code> if it is not. This dummy implementation always returns
      * <code>true</code>.
      */
-    public boolean authorizePayment(CreditCardDTO card, int amount) {
+    public boolean authorizePayment(CreditCardDTO card, double amount) {
         return true;
     }
 }
