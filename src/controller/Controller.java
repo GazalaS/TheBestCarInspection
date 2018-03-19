@@ -1,8 +1,12 @@
 package controller;
 
+import integration.CreditCardDTO;
+import integration.CreditCardProcessingUnit;
+import integration.ReceiptDTO;
 import javafx.print.Printer;
-import se.kth.sda.model.GarageManager;
-import se.kth.sda.model.InspectionManager;
+import model.GarageManager;
+import model.InspectionManager;
+i
 
 
 public class Controller {    
@@ -26,7 +30,7 @@ public class Controller {
      * Calls the next customer method from the garage manager, then waits 3 sec
      * and closes the door after the customer is in the garage.
      */
-    public void startNewInspection{
+    public void startNewInspection () {
         garageManager.nextCustomer();
         Thread.sleep(3000);
         garageManager.closeDoor();
@@ -47,7 +51,7 @@ public class Controller {
      * @param creditCard Customers credit card information.
      * @return 
      */
-    public boolean authorisePayment(CreditCardDTO creditCard){        
+    public boolean authorisePayment(CreditCardDTO creditCard){
         CreditCardProcessingUnit creditCardProcessingUnit = new CreditCardProcessingUnit;
         return creditCardProcessingUnit.authorisePayment(creditCard);        
     }    
