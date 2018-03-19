@@ -38,7 +38,7 @@ public class VehicleDBHandler {
      * @return
      * @throws IOException 
      */
-    private List<InspectionInfoDTO> getInspectionChecklist()throws IOException {
+    public List<InspectionInfoDTO> getInspectionChecklist()throws IOException {
         // Make sure the file can be found.
         Charset charset = Charset.forName("US-ASCII");
         Path path = Paths.get(INSPECTION_CHECKLIST_FILE);
@@ -70,7 +70,7 @@ public class VehicleDBHandler {
      * @param inspectionCheckList
      * @throws IOException 
      */
-    private void saveInspectionCheckList(List<InspectionInfoDTO> inspectionCheckList) throws IOException{
+    public void saveInspectionCheckList(List<InspectionInfoDTO> inspectionCheckList) throws IOException{
         Path resultsFile = Paths.get(INSPECTION_CHECKLIST_FILE).toAbsolutePath();
         FileWriter writer = new FileWriter(resultsFile.toString());
         for(InspectionInfoDTO details : inspectionCheckList) {
