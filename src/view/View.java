@@ -3,12 +3,15 @@ package view;
 import controller.Controller;
 import integration.CreditCardDTO;
 import integration.ReceiptDTO;
+import java.io.IOException;
+import java.util.Date;
+
 
 public class View {
 
     private Controller controller;
     private String regNumber;
-    private double inspectionCost;
+    private double cost;
     private Parser parser;
     private PrintView printView;
     private boolean cardAuthoriztion;
@@ -25,7 +28,7 @@ public class View {
      * Main application loop
      */
 
-    public void operationLoop() {
+    public void operationLoop() throws IOException, InterruptedException {
 
         boolean finished = false;
 
@@ -46,7 +49,7 @@ public class View {
      * @return If the <code>quit</code> command is detected returns <code>true</code>, if not returns <code>false<code/>.
      */
 
-    public boolean processCommand(Command command) {
+    public boolean processCommand(Command command) throws IOException, InterruptedException {
 
         boolean wantToQuit = false;
 
@@ -74,7 +77,12 @@ public class View {
 
             case PAY:
                 printView.printMessage("Credit card payment.");
-                getInspectionCost();
+                paymentByCreditCard();
+                break;
+
+            case INSPECTION:
+                printView.printMessage("Let's start with inspections.");
+                inspection();
                 break;
 
             case CLOSE:
@@ -141,34 +149,45 @@ public class View {
      * Starts a new inspection by calling a function in the controller
      */
 
-    private void startInspection () {
+    private void startInspection () throws InterruptedException {
 
         regNumber = parser.getInspectionNumber();
         controller.startNewInspection();
     }
 
-    private void getInspectionCost () {
-        inspectionCost = controller.getInspectionCost(regNumber);
+    private void getInspectionCost () throws IOException {
+        cost = controller.getInspectionCost(regNumber);
     }
 
-    private void paymentByCreditCard () {
+    private void paymentByCreditCard () throws IOException {
         CreditCardDTO creditCardNumber = parser.getCreditCardNumber();
-        cardAuthoriztion = controller.authorizePayment(creditCardNumber);
-        ReceiptDTO receipt = new ReceiptDTO(inspectionCost, );
+        cardAuthoriztion = controller.authorizePayment(creditCardNumber, cost);
+        ReceiptDTO receipt = new ReceiptDTO(cost, new Date(), regNumber);
+        controller.printReceipt(receipt);
+    }
 
-    private void inspection () {
+    private void inspection () throws IOException {
+
         if (cardAuthoriztion) {
-            printView.printMessage("The inspection can procede");
+            printView.printMessage("The inspection can procede!");
 
+            if (controller.hasNextInspection()) {
+
+                String nextInspectionInfo = controller.getNextInspection();
+
+                printView.printMessage("The next inspection is: " + nextInspectionInfo);
+
+                controller.enterInspectionResult(parser.inspectionResult());
+            } else {
+                controller.saveInspectionResult(regNumber);
+            }
 
         } else {
             printView.printMessage("The inspection is not authorized!");
         }
-
     }
 
     private void inspectionCompleted () {
-
 
     }
 

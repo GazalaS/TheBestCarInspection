@@ -1,6 +1,7 @@
 //
 package integration;
 
+import java.time.YearMonth;
 import java.util.Date;
 
 /**
@@ -20,7 +21,7 @@ public class ReceiptDTO {
      * @param reciptDate to hold the date.
      * @param regNumber to hold the car register number.
      */
-    public ReceiptDTO( double cost, Date reciptDate, String regNumber) {
+    public ReceiptDTO(double cost, Date reciptDate, String regNumber) {
       
         this.cost = cost;
         this.receiptDate = reciptDate;

@@ -77,4 +77,29 @@ public class Parser {
         return creditCardNumber;
     }
 
+    public String inspectionResult () {
+
+        String inspectionResult = null;
+        boolean success = false;
+
+        while (!success) {
+
+        printView.printInput("What is the result of the inspection? \n Accepted values are **pass** or **fail**");
+
+            inspectionResult = reader.nextLine();
+
+            if (inspectionResult.equals("pass") || inspectionResult.equals("fail")) {
+                success = true;
+            } else {
+                printView.printMessage("Your input is wrong. \n Accepted values are **pass** or **fail**");
+            }
+        }
+
+        return inspectionResult;
+
+
+
+
+    }
+
 }
