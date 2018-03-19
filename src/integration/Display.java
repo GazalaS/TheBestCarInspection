@@ -1,4 +1,4 @@
-package se.kth.sda.integration;
+package integration;
 
 public class Display {
 }

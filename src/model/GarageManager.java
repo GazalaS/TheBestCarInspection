@@ -1,4 +1,4 @@
-package se.kth.sda.model;
+package model;
 
 public class GarageManager {
 }

@@ -98,5 +98,6 @@ public class Controller {
     public void printResult(){
         printer.printInspectionResult();
     }
+
 }
 
