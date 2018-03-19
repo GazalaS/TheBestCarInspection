@@ -5,6 +5,7 @@ import integration.CreditCardProcessingUnit;
 import integration.ReceiptDTO;
 import integration.Printer;
 import integration.Garage;
+import java.io.IOException;
 import model.InspectionManager;
 
 
@@ -29,7 +30,7 @@ public class Controller {
      * Calls the next customer method from the garage manager, then waits 3 sec
      * and closes the door after the customer is in the garage.
      */
-    public void startNewInspection(){
+    public void startNewInspection() throws InterruptedException{
         garage.nextCustomer();
         Thread.sleep(3000);
         garage.closeDoor();
@@ -41,7 +42,7 @@ public class Controller {
      * @param regNumber Registration
      * @return 
      */
-    public double getInspectionCost(String regNumber){
+    public double getInspectionCost(String regNumber) throws IOException{
         return inspectionManager.getInspectionCost();        
     }
     
@@ -51,8 +52,8 @@ public class Controller {
      * @return 
      */
     public boolean authorisePayment(CreditCardDTO creditCard){        
-        CreditCardProcessingUnit creditCardProcessingUnit = new CreditCardProcessingUnit;
-        return creditCardProcessingUnit.authorisePayment(creditCard);        
+        CreditCardProcessingUnit creditCardProcessingUnit = new CreditCardProcessingUnit();
+        return creditCardProcessingUnit.authorizePayment(creditCard);        
     }    
         
     /**
