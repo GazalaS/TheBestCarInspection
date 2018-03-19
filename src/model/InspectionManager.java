@@ -40,8 +40,8 @@ public class InspectionManager {
 	 * @return The inspection cost for the specify vehicle.
 	 * @throws IOException 
 	 */
-	public double getInspectionCost() throws IOException {
-		inspectionChecklist = vehicleDB.getInspectionChecklist();
+	public double getInspectionCost(String regNumber) throws IOException {
+		inspectionChecklist = vehicleDB.getInspectionChecklist(regNumber);
 		calculateInspectionCost();
 		return inpsectionCost;
 	}
@@ -94,8 +94,8 @@ public class InspectionManager {
 	 *            Registration number of the vehicle.
 	 * @throws IOException 
 	 */
-	public void saveInspectionResult() throws IOException {
-		vehicleDB.saveInspectionCheckList(inspectionChecklist);
+	public void saveInspectionResult(String regNumber) throws IOException {
+		vehicleDB.saveInspectionChecklist(regNumber, inspectionChecklist);
 	}
 
 	/**
