@@ -13,8 +13,8 @@ public class Controller {
     private CreditCardProcessingUnit creditCardProcessingUnit;
     
     /**
-     * Creates controller andd makes new Garage manager, Ispection manager
-     * and Printer objects.
+     * Creates controller andd makes new Garage manager, Printer and passes it
+     * to inspectionManager object.
      */    
     public Controller() {
         garageManager = new GarageManager();
@@ -33,7 +33,7 @@ public class Controller {
     }
     
     /**
-     * Gets cost of the inspection baset on the list of inspection that is 
+     * Gets cost of the inspection based on the list of inspection that is 
      * provided based on the registration number.
      * @param regNumber Registration
      * @return 
@@ -43,57 +43,57 @@ public class Controller {
     }
     
     /**
-     * 
-     * @param creditCard
+     * Passes creditCard to credidtCardProcessingUnit to authorisePayment.
+     * @param creditCard Customers credit card information.
      * @return 
      */
     public boolean authorisePayment(CreditCardDTO creditCard){        
-        CreditCardProcessingUnit creditCardProcessingUnit = new CreditCardProcessingUnit;   //???
+        CreditCardProcessingUnit creditCardProcessingUnit = new CreditCardProcessingUnit;
         return creditCardProcessingUnit.authorisePayment(creditCard);        
     }    
         
     /**
-     * 
-     * @return 
+     * Calls inspectionManager to make next inspection.
+     * @return Name of the next inspection to be performed.
      */
     public String getNextInspection(){
         return inspectionManager.getNextInspection();        
     }
     
     /**
-     * 
-     * @param result 
+     * Calls inspetionManager to enter the result of the inspection.
+     * @param result The result of the performed inspection.
      */
     public void enterInspectionResult(String result){
-        inspectionManager.enterInspectionnResult(result);
+        inspectionManager.enterInspectionResult(result);
     }
     
     /**
-     * 
-     * @param receipt 
+     * Prints the receipt.
+     * @param receipt Receipt for the paid inspection.
      */
     public void printReceipt(ReceiptDTO receipt){
         printer.printReceipt();
     }
     
     /**
-     * 
-     * @return 
+     * Asks if there is any more inspections to be made.
+     * @return If there is any more inspections to be made.
      */
     public boolean hasNextInspection(){        
         return inspectionManager.hasNextInspection();
     }
     
     /**
-     * 
-     * @param regNumber 
+     * Saves the result of the inspection for the later use.
+     * @param regNumber Registration number of the car being inspected.
      */
     public void saveInspectionResult(String regNumber){
         inspectionManager.saveInspectionResult(regNumber);
     }
     
     /**
-     * 
+     * Passes inspection results to the printer for the printing.
      */
     public void printResult(){
         printer.printInspectionResult();
