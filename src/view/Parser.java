@@ -105,7 +105,7 @@ public class Parser {
 
         while (!success) {
 
-        printView.printInput("What is the result of the inspection? \nAccepted input is *+*pass*+* or **+fail*+*");
+        printView.printInput("What is the result of the inspection? \nAccepted input is \"pass\" or \"fail\".");
 
             inspectionResult = reader.nextLine();
 

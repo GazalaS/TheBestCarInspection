@@ -22,6 +22,7 @@ public class View {
         parser = new Parser();
         printView = new PrintView();
         cardAuthoriztion = false;
+        regNumber = null;
     }
 
     /**
@@ -58,7 +59,8 @@ public class View {
         switch (commandWord) {
 
             case UNKNOWN:
-                printView.printMessage("This is unknown");
+                printView.printMessage("This command is unknown.\nAvailable commands are: ");
+                showCommands();
                 break;
 
             case NEXT:
@@ -74,9 +76,7 @@ public class View {
                 printView.printMessage("Close the door.");*/
 
             case COST:
-                printView.printMessage("The inspection cost is: ");
                 getInspectionCost();
-                printView.printMessage(String.valueOf(cost));
                 break;
 
             case PAY:
@@ -85,7 +85,6 @@ public class View {
                 break;
 
             case INSPECTION:
-                printView.printMessage("Let's start with inspections.");
                 inspection();
                 break;
 
@@ -152,25 +151,52 @@ public class View {
 
     private void startInspection () throws InterruptedException {
 
-        regNumber = parser.getInspectionNumber();
-        controller.startNewInspection();
+        if (regNumber == null) {
+
+            controller.startNewInspection();
+            regNumber = parser.getInspectionNumber();
+            printView.printMessage("Your registrarion number is: " + regNumber);
+        } else {
+
+            printView.printMessage("Inspection for vehicle with registration number " + regNumber + "is already under way." +
+                    "\nProceed with next inspection after this one is done.");
+        }
+
+
     }
 
     private void getInspectionCost () throws IOException {
         cost = controller.getInspectionCost(regNumber);
+
+        if (cost == 0) {
+            printView.printMessage("There are no inspections loaded! \nPlease start a new inspection by entering \"next\".");
+        } else {
+            printView.printMessage("The inspection cost is: " + String.valueOf(cost));
+        }
     }
 
     private void paymentByCreditCard () {
-        CreditCardDTO creditCardNumber = parser.getCreditCardNumber();
-        cardAuthoriztion = controller.authorizePayment(creditCardNumber, cost);
-        ReceiptDTO receipt = new ReceiptDTO(cost, new Date(), regNumber);
-        controller.printReceipt(receipt);
+        if (cost == 0) {
+            printView.printMessage("There is nothing to pay, please get the cost of the inspection by entering \"cost\".");
+        } else if (cardAuthoriztion) {
+
+            printView.printMessage("The payment has been done already! \nProceede with inspections by eneterinf \"inspection\".");
+
+        } else {
+
+            CreditCardDTO creditCardNumber = parser.getCreditCardNumber();
+            cardAuthoriztion = controller.authorizePayment(creditCardNumber, cost);
+            ReceiptDTO receipt = new ReceiptDTO(cost, new Date(), regNumber);
+            controller.printReceipt(receipt);
+            printView.printMessage("Please start with inspections by entering \"inspection\".");
+        }
     }
 
     private void inspection () throws IOException {
 
         if (cardAuthoriztion) {
-            //printView.printMessage("The inspection can procede!");
+
+            printView.printMessage("Let's start with inspections.");
 
             while (controller.hasNextInspection()) {
 
@@ -183,14 +209,10 @@ public class View {
 
                 printView.printMessage("There are no more inspections to conduct.");
                 controller.saveInspectionResult(regNumber);
+                regNumber = null;
 
         } else {
             printView.printMessage("The inspection is not authorized!");
         }
     }
-
-    private void inspectionCompleted () {
-
-    }
-
 }
