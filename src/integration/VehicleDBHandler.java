@@ -23,7 +23,7 @@ import java.util.List;
 public class VehicleDBHandler {
     
     private List<InspectionInfoDTO> inspectionChecklist;
-    private static String INSPECTION_CHECKLIST_FILE = "inspectionchecklist.txt";
+    private String INSPECTION_CHECKLIST_FILE = "inspectionchecklist.txt";
     
     /**
      * 
@@ -49,9 +49,8 @@ public class VehicleDBHandler {
                 InspectionInfoDTO inspectionInfo = new InspectionInfoDTO(
                                                      sections[0],
                                                      Double.parseDouble(sections[1]),
-                                                      Boolean.parseBoolean(sections[2]));
-                inspectionChecklist.add(inspectionInfo);
-                details = reader.readLine();
+                                                     Boolean.parseBoolean(sections[2]));
+                inspectionChecklist.add(inspectionInfo);                
             }
         }
         
