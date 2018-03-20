@@ -6,13 +6,26 @@ import view.View;
 
 import java.io.IOException;
 
+
 public class Main {
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) {
 
         Controller controller = new Controller();
         View view = new View(controller);
 
-        view.operationLoop();
+
+        try {
+            view.operationLoop();
+        } catch (IOException e) {
+
+            e.printStackTrace();
+            System.out.println(e);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            System.out.println(e);
+        }
+
     }
 }

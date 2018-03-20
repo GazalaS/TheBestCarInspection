@@ -66,9 +66,12 @@ public class View {
                 startInspection();
                 break;
 
-            case OPEN:
+            /*case OPEN:
                 printView.printMessage("Open the door.");
-                break;
+                break;*/
+
+            /*case CLOSE:
+                printView.printMessage("Close the door.");*/
 
             case COST:
                 printView.printMessage("The inspection cost is: ");
@@ -85,9 +88,6 @@ public class View {
                 printView.printMessage("Let's start with inspections.");
                 inspection();
                 break;
-
-            case CLOSE:
-                printView.printMessage("Close the door.");
 
             case HELP:
                 printView.printMessage("This is help");
@@ -147,7 +147,7 @@ public class View {
     }
 
     /**
-     * Starts a new inspection by calling a function in the controller
+     * Starts a new inspection by calling a function <code>startNewInspection()</code> in the controller
      */
 
     private void startInspection () throws InterruptedException {
@@ -160,7 +160,7 @@ public class View {
         cost = controller.getInspectionCost(regNumber);
     }
 
-    private void paymentByCreditCard () throws IOException {
+    private void paymentByCreditCard () {
         CreditCardDTO creditCardNumber = parser.getCreditCardNumber();
         cardAuthoriztion = controller.authorizePayment(creditCardNumber, cost);
         ReceiptDTO receipt = new ReceiptDTO(cost, new Date(), regNumber);
@@ -170,18 +170,19 @@ public class View {
     private void inspection () throws IOException {
 
         if (cardAuthoriztion) {
-            printView.printMessage("The inspection can procede!");
+            //printView.printMessage("The inspection can procede!");
 
-            if (controller.hasNextInspection()) {
+            while (controller.hasNextInspection()) {
 
                 String nextInspectionInfo = controller.getNextInspection();
 
                 printView.printMessage("The next inspection is: " + nextInspectionInfo);
 
                 controller.enterInspectionResult(parser.inspectionResult());
-            } else {
-                controller.saveInspectionResult(regNumber);
             }
+
+                printView.printMessage("There are no more inspections to conduct.");
+                controller.saveInspectionResult(regNumber);
 
         } else {
             printView.printMessage("The inspection is not authorized!");

@@ -42,9 +42,18 @@ public class Parser {
         return new Command(commands.getCommandWord(word1));
     }
 
+    /**
+     * Shows every valid command
+     */
+
     public void getAllCommands () {
         commands.showAll();
     }
+
+    /**
+     * Takes inspection number from the user
+     * @return Returns the inspection number user entered
+     */
 
     public String getInspectionNumber () {
         String regNumber;
@@ -53,6 +62,11 @@ public class Parser {
 
         return regNumber = reader.nextLine();
     }
+
+    /**
+     * Takes the credit card data from user input.
+     * @return Returns credit card object.
+     */
 
     public CreditCardDTO getCreditCardNumber () {
 
@@ -79,6 +93,11 @@ public class Parser {
         return creditCardNumber;
     }
 
+    /**
+     * Gets the inspection result from the user - valid inputs are <code>pass</code> or <code>fail</code>
+     * @return Return the inspection result
+     */
+
     public String inspectionResult () {
 
         String inspectionResult = null;
@@ -86,7 +105,7 @@ public class Parser {
 
         while (!success) {
 
-        printView.printInput("What is the result of the inspection? \n Accepted values are **pass** or **fail**");
+        printView.printInput("What is the result of the inspection? \nAccepted input is *+*pass*+* or **+fail*+*");
 
             inspectionResult = reader.nextLine();
 
@@ -96,12 +115,6 @@ public class Parser {
                 printView.printMessage("Your input is wrong.");
             }
         }
-
         return inspectionResult;
-
-
-
-
     }
-
 }

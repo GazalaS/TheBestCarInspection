@@ -6,7 +6,7 @@ package view;
 
 public enum CommandWord {
 
-    NEXT("next"), OPEN("open"), CLOSE("close"), COST("cost"), PAY("pay"), INSPECTION("inspection"), HELP("help"), QUIT("quit"), UNKNOWN("?");
+    NEXT("next"), /*OPEN("open"), CLOSE("close"),*/ COST("cost"), PAY("pay"), INSPECTION("inspection"), HELP("help"), QUIT("quit"), UNKNOWN("?");
 
 
     private String commandString;
