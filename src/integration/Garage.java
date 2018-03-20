@@ -26,6 +26,13 @@ public class Garage {
         door.open();
         queueNumDisp.nextNumber();
     }
+    
+    /**
+     * 
+     */
+    public void openDoor() {
+        door.open();
+    }
 
     /**
      * Closes the door

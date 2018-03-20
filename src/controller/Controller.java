@@ -98,8 +98,12 @@ public class Controller {
      *
      * @param regNumber Registration number of the car being inspected.
      */
-    public void saveInspectionResult(String regNumber) throws IOException {
+    public void saveInspectionResult(String regNumber) throws IOException, InterruptedException {
         inspectionManager.saveInspectionResult(regNumber);
+        printResult();
+        garage.openDoor();
+        Thread.sleep(3000);
+        garage.closeDoor();
     }
 
     /**
