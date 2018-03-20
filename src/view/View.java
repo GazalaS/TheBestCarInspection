@@ -212,6 +212,7 @@ public class View {
                 controller.saveInspectionResult(regNumber);
                 regNumber = null;
                 cost = 0.0;
+                cardAuthoriztion = false;
         } else {
             printView.printMessage("The inspection is not authorized!");
         }
