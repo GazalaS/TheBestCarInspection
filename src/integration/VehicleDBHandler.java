@@ -74,7 +74,7 @@ public class VehicleDBHandler {
         }
         writer.close();
 
-        File file = new File(INSPECTION_CHECKLIST_FILE);
+        File file = new File(regNumber + INSPECTION_CHECKLIST_FILE);
         return file.exists();
     }
 }

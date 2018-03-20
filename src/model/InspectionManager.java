@@ -1,7 +1,7 @@
 package model;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import integration.InspectionInfoDTO;
 import integration.Printer;
@@ -17,7 +17,7 @@ public class InspectionManager {
 	private List<InspectionInfoDTO> inspectionChecklist;
 	private VehicleDBHandler vehicleDB;
 	private Printer printer;
-	private double inpsectionCost;
+	private double inspectionCost;
 	private int inspectionCheckListIndexTracker;
 
 	/**
@@ -43,11 +43,11 @@ public class InspectionManager {
 	public double getInspectionCost(String regNumber) throws IOException {
 		inspectionChecklist = vehicleDB.getInspectionChecklist(regNumber);
 		calculateInspectionCost();
-		return inpsectionCost;
+		return inspectionCost;
 	}
 
 	private void calculateInspectionCost() {
-		this.inpsectionCost = inspectionChecklist.stream()
+		inspectionCost = inspectionChecklist.stream()
 										.map(item -> item.getPrice())
 										.reduce(0.0, Double::sum);
 	}
@@ -82,8 +82,13 @@ public class InspectionManager {
 	 *            Result of inspection. eg. "Pass" or "Fail".
 	 */
 	public void enterInspectionResult(String result) {
-		boolean isPass = (result.toLowerCase().equals(result.toLowerCase())) ? true : false;
+		boolean isPass = (result.toLowerCase().equals("pass".toLowerCase())) ? true : false;
 		inspectionChecklist.get(inspectionCheckListIndexTracker - 1).setInspectionResult(isPass);
+	}
+	
+	private List<InspectionInfoDTO> filterFailResult() {
+		return inspectionChecklist.stream()
+				.filter(item -> item.getInspectionResult() == false).collect(Collectors.toList());
 	}
 
 	/**
@@ -95,7 +100,7 @@ public class InspectionManager {
 	 * @throws IOException 
 	 */
 	public void saveInspectionResult(String regNumber) throws IOException {
-		vehicleDB.saveInspectionChecklist(regNumber, inspectionChecklist);
+		vehicleDB.saveInspectionChecklist(regNumber, filterFailResult());
 	}
 
 	/**
@@ -103,8 +108,9 @@ public class InspectionManager {
 	 * inspection.
 	 */
 	public void printInspectionResult() {
-		List<InspectionInfoDTO> inpsectionResult = inspectionChecklist.stream()
-				.filter(item -> item.getInspectionResult() == false).collect(Collectors.toList());
-		printer.printInspectionResult(inpsectionResult);
+		List<InspectionInfoDTO> filteredResult = filterFailResult();
+		if (!filteredResult.isEmpty()) {
+			printer.printInspectionResult(filteredResult);
+		}
 	}
 }
