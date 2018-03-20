@@ -67,7 +67,7 @@ public class ControllerTest {
      */
     @Test
     public void testGetInspectionCost() throws Exception {
-        String regNumber = "ABC123";
+        String regNumber = "ABC123h";
         Controller instance = new Controller();
        
         double expResult = 360.5;
