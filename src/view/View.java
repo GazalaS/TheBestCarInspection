@@ -170,6 +170,7 @@ public class View {
 
         if (cost == 0) {
             printView.printMessage("There are no inspections loaded! \nPlease start a new inspection by entering \"next\".");
+            regNumber = null;
         } else {
             printView.printMessage("The inspection cost is: " + String.valueOf(cost));
         }
