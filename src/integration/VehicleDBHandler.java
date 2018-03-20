@@ -12,6 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -23,17 +24,8 @@ import java.util.List;
  * @author GazalaS <gazalafshaikh@gmail.com>
  */
 public class VehicleDBHandler {
-
-    private List<InspectionInfoDTO> inspectionChecklist;
+   
     private final static String INSPECTION_CHECKLIST_FILE = "inspectionchecklist.txt";
-
-    /**
-     * Instantiates a new VehicleDBHandler and creates an List
-     * <code>{@link InspectionInfoDTO}</code> object.
-     */
-    public VehicleDBHandler() {
-        inspectionChecklist = new ArrayList<InspectionInfoDTO>();
-    }
 
     /**
      * Gets Inspection Checklist from DB for a particulare regNumber
@@ -45,9 +37,12 @@ public class VehicleDBHandler {
      */
     public List<InspectionInfoDTO> getInspectionChecklist(String regNumber) throws IOException {
         // Make sure the file can be found.
+        List<InspectionInfoDTO> inspectionChecklist = new ArrayList<InspectionInfoDTO>();
         Charset charset = Charset.forName("US-ASCII");
         Path path = Paths.get(regNumber + INSPECTION_CHECKLIST_FILE);
-        try (BufferedReader reader = Files.newBufferedReader(path, charset)) {
+        if (Files.exists(path, new LinkOption[]{ LinkOption.NOFOLLOW_LINKS}))
+        {
+            BufferedReader reader = Files.newBufferedReader(path, charset);
             String details;
             while ((details = reader.readLine()) != null) {
                 String[] sections = details.split(",");
@@ -56,13 +51,9 @@ public class VehicleDBHandler {
                         Double.parseDouble(sections[1]),
                         Boolean.parseBoolean(sections[2]));
                 inspectionChecklist.add(inspectionInfo);
-            }
-        } catch (FileNotFoundException e) {
-            System.err.println("Unable to open " + INSPECTION_CHECKLIST_FILE);
-        } catch (IOException e) {
-            System.err.println("Invalid Registration Number.");
-        }
-
+                
+            }   
+        } 
         return inspectionChecklist;
     }
 

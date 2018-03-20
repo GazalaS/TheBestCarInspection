@@ -1,2 +1,2 @@
-Check Oil,160.5,false
-Check HeadLights,200.0,false
+Check Oil,160.5,true
+Check HeadLights,200.0,true
