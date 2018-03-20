@@ -60,7 +60,7 @@ public class VehicleDBHandler {
         } catch (FileNotFoundException e) {
             System.err.println("Unable to open " + INSPECTION_CHECKLIST_FILE);
         } catch (IOException e) {
-            System.err.println("Invalid Registraion Number.");
+            System.err.println("Invalid Registration Number.");
         }
 
         return inspectionChecklist;

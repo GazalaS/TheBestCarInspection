@@ -28,13 +28,6 @@ public class Garage {
     }
     
     /**
-     * 
-     */
-    public void openDoor() {
-        door.open();
-    }
-
-    /**
      * Closes the door
      */
     public void closeDoor() {
@@ -47,5 +40,4 @@ public class Garage {
     public void openDoor() {
         door.open();
     }
-
 }
