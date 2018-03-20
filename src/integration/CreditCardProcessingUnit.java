@@ -2,6 +2,7 @@ package integration;
 
 /**
  * Handles all communication with the payment authorization system.
+ * 
  */
 public class CreditCardProcessingUnit {
 

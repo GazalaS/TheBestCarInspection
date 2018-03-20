@@ -7,6 +7,7 @@ import java.util.Date;
 /**
  *
  * This is a DTO class which hold the receipt information.
+ * @author Abdullah.
  */
 public class ReceiptDTO {
 
