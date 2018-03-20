@@ -155,9 +155,9 @@ public class View {
 
             controller.startNewInspection();
             regNumber = parser.getInspectionNumber();
-            printView.printMessage("Your registrarion number is: " + regNumber);
-        } else {
+            printView.printMessage("Your registration number is: " + regNumber);
 
+        } else {
             printView.printMessage("Inspection for vehicle with registration number " + regNumber + "is already under way." +
                     "\nProceed with next inspection after this one is done.");
         }
@@ -180,7 +180,7 @@ public class View {
             printView.printMessage("There is nothing to pay, please get the cost of the inspection by entering \"cost\".");
         } else if (cardAuthoriztion) {
 
-            printView.printMessage("The payment has been done already! \nProceede with inspections by eneterinf \"inspection\".");
+            printView.printMessage("The payment has been done already! \nProceed with inspections by entering \"inspection\".");
 
         } else {
 
@@ -210,7 +210,7 @@ public class View {
                 printView.printMessage("There are no more inspections to conduct.");
                 controller.saveInspectionResult(regNumber);
                 regNumber = null;
-
+                cost = 0.0;
         } else {
             printView.printMessage("The inspection is not authorized!");
         }
