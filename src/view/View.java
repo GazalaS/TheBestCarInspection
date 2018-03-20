@@ -59,7 +59,7 @@ public class View {
         switch (commandWord) {
 
             case UNKNOWN:
-                printView.printMessage("This command is unknown.\nAvailable commands are: ");
+                printView.printMessage("This command is unknown.");
                 showCommands();
                 break;
 
