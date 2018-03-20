@@ -5,6 +5,8 @@
  */
 package integration;
 
+import javax.swing.JLabel;
+
 /**
  * This is a facade to the hardware of the GARAGE, namely the door and the queue
  * number display on the outside wall.
@@ -39,5 +41,12 @@ public class Garage {
      */
     public void openDoor() {
         door.open();
+    }
+    
+    public int getQueueNumberDisplay() {
+        return queueNumDisp.getQueueNumber();
+    }
+    public JLabel getDoorStateLabel(){
+            return door.getDoorStateLabel();
     }
 }

@@ -55,4 +55,9 @@ class Door {
         frame.setBounds(200, 0, 350, 50);
         frame.setVisible(true);
     }
+    
+    public JLabel getDoorStateLabel() {
+        return doorStateLabel;
+    }
+    
 }
