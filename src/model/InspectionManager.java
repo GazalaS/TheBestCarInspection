@@ -30,6 +30,7 @@ public class InspectionManager {
 		vehicleDB = new VehicleDBHandler();
 		this.printer = printer;
 		inspectionCheckListIndexTracker = 0;
+		inspectionChecklist = new ArrayList<>();
 	}
 
 	/**
@@ -38,7 +39,7 @@ public class InspectionManager {
 	 * @param regNumber
 	 *            Registration number of the specify vehicle.
 	 * @return The inspection cost for the specify vehicle.
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public double getInspectionCost(String regNumber) throws IOException {
 		inspectionChecklist = vehicleDB.getInspectionChecklist(regNumber);
@@ -47,9 +48,7 @@ public class InspectionManager {
 	}
 
 	private void calculateInspectionCost() {
-		inspectionCost = inspectionChecklist.stream()
-										.map(item -> item.getPrice())
-										.reduce(0.0, Double::sum);
+		inspectionCost = inspectionChecklist.stream().map(item -> item.getPrice()).reduce(0.0, Double::sum);
 	}
 
 	/**
@@ -85,10 +84,10 @@ public class InspectionManager {
 		boolean isPass = (result.toLowerCase().equals("pass".toLowerCase())) ? true : false;
 		inspectionChecklist.get(inspectionCheckListIndexTracker - 1).setInspectionResult(isPass);
 	}
-	
+
 	private List<InspectionInfoDTO> filterFailResult() {
-		return inspectionChecklist.stream()
-				.filter(item -> item.getInspectionResult() == false).collect(Collectors.toList());
+		return inspectionChecklist.stream().filter(item -> item.getInspectionResult() == false)
+				.collect(Collectors.toList());
 	}
 
 	/**
@@ -97,7 +96,7 @@ public class InspectionManager {
 	 * 
 	 * @param regNumber
 	 *            Registration number of the vehicle.
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public void saveInspectionResult(String regNumber) throws IOException {
 		vehicleDB.saveInspectionChecklist(regNumber, filterFailResult());
@@ -108,9 +107,11 @@ public class InspectionManager {
 	 * inspection.
 	 */
 	public void printInspectionResult() {
-		List<InspectionInfoDTO> filteredResult = filterFailResult();
-		if (!filteredResult.isEmpty()) {
-			printer.printInspectionResult(filteredResult);
-		}
+		printer.printInspectionResult(filterFailResult());
 	}
+
+	public List<InspectionInfoDTO> getInspectionChecklist() {
+		return inspectionChecklist;
+	}
+
 }
