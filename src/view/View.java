@@ -192,7 +192,7 @@ public class View {
         }
     }
 
-    private void inspection () throws IOException {
+    private void inspection () throws IOException, InterruptedException {
 
         if (cardAuthoriztion) {
 
