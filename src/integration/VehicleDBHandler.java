@@ -24,7 +24,7 @@ import java.util.List;
 public class VehicleDBHandler {
     
     private List<InspectionInfoDTO> inspectionChecklist;
-    private String INSPECTION_CHECKLIST_FILE = "inspectionchecklist.txt";
+    private final static String INSPECTION_CHECKLIST_FILE = "inspectionchecklist.txt";
     
     /**
      * Instantiates a new VehicleDBHandler and creates an List <code>{@link InspectionInfoDTO}</code> object.
@@ -41,9 +41,8 @@ public class VehicleDBHandler {
      */
     public List<InspectionInfoDTO> getInspectionChecklist(String regNumber)throws IOException {
         // Make sure the file can be found.
-        INSPECTION_CHECKLIST_FILE = regNumber + INSPECTION_CHECKLIST_FILE;
         Charset charset = Charset.forName("US-ASCII");
-        Path path = Paths.get(INSPECTION_CHECKLIST_FILE);
+        Path path = Paths.get(regNumber + INSPECTION_CHECKLIST_FILE);
         try (BufferedReader reader = Files.newBufferedReader(path, charset)) {
             String details;
             while((details = reader.readLine()) != null) {
@@ -75,8 +74,7 @@ public class VehicleDBHandler {
      * @throws IOException 
      */
     public boolean saveInspectionChecklist(String regNumber, List<InspectionInfoDTO> inspectionChecklist) throws IOException{
-        INSPECTION_CHECKLIST_FILE = regNumber + INSPECTION_CHECKLIST_FILE;
-        Path resultsFile = Paths.get(INSPECTION_CHECKLIST_FILE).toAbsolutePath();
+        Path resultsFile = Paths.get(regNumber + INSPECTION_CHECKLIST_FILE).toAbsolutePath();
         FileWriter writer = new FileWriter(resultsFile.toString());
         for(InspectionInfoDTO details : inspectionChecklist) {
             writer.write(details.getInspectionInformation() + ","+ details.getPrice() + "," + details.getInspectionResult());
