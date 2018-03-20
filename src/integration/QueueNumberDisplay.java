@@ -45,4 +45,8 @@ class QueueNumberDisplay {
         frame.setBounds(600, 0, 200, 80);
         frame.setVisible(true);
     }
+    
+    public int getQueueNumber() {
+        return queueNumber;
+    }
 }
