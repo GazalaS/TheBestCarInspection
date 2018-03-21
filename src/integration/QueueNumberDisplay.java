@@ -18,6 +18,7 @@ class QueueNumberDisplay {
     private static String HEADER = "Now Serving:";
     private int queueNumber = -1;
     private JLabel queueNumberLabel = new JLabel("", SwingConstants.CENTER);
+    private JFrame frame = new JFrame(HEADER);
 
     /**
      * Connects to the queue number display and shows the number
@@ -36,7 +37,6 @@ class QueueNumberDisplay {
     }
 
     private void contactDisplay() {
-        JFrame frame = new JFrame(HEADER);
         Font labelFont = new Font(Font.SERIF, Font.BOLD, 30);
         queueNumberLabel.setFont(labelFont);
         frame.getContentPane().setBackground(Color.BLACK);
@@ -48,5 +48,9 @@ class QueueNumberDisplay {
     
     public int getQueueNumber() {
         return queueNumber;
+    }
+    
+    public void closeFrame() {
+    		frame.dispose();
     }
 }
