@@ -113,4 +113,7 @@ public class Controller {
         inspectionManager.printInspectionResult();
     }
 
+    public void close() {
+    		garage.close();
+    }
 }

@@ -21,6 +21,7 @@ class Door {
     private static final Color OPEN_COLOR = Color.GREEN;
 
     private JLabel doorStateLabel = new JLabel("", SwingConstants.CENTER);
+    private JFrame frame = new JFrame("Physical Garage Door");
 
     /**
      * Connects to the door servo and closes the door.
@@ -47,7 +48,6 @@ class Door {
     }
 
     private void contactDoor() {
-        JFrame frame = new JFrame("Physical Garage Door");
         Font labelFont = new Font(Font.SERIF, Font.BOLD, 30);
         doorStateLabel.setFont(labelFont);
         frame.getContentPane().setBackground(Color.GRAY);
@@ -60,4 +60,7 @@ class Door {
         return doorStateLabel;
     }
     
+    public void closeFrame() {
+    		frame.dispose();
+    }
 }

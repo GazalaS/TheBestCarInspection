@@ -49,4 +49,9 @@ public class Garage {
     public JLabel getDoorStateLabel(){
             return door.getDoorStateLabel();
     }
+    
+    public void close() {
+    		door.closeFrame();
+    		queueNumDisp.closeFrame();
+    }
 }

@@ -88,6 +88,7 @@ public class View {
 
             case QUIT:
                 wantToQuit = quit(command);
+                controller.close();
                 break;
         }
         return wantToQuit;
