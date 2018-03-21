@@ -65,13 +65,7 @@ public class VehicleDBHandlerTest {
 
         List<InspectionInfoDTO> result = instance.getInspectionChecklist(regNumber);
 
-        assertEquals(expResult.get(0).getInspectionInformation(), result.get(0).getInspectionInformation());
-        assertEquals(expResult.get(0).getPrice(), result.get(0).getPrice(), 0);
-        assertEquals(expResult.get(0).getInspectionResult(), result.get(0).getInspectionResult());
-
-        assertEquals(expResult.get(1).getInspectionInformation(), result.get(1).getInspectionInformation());
-        assertEquals(expResult.get(1).getPrice(), result.get(1).getPrice(), 0);
-        assertEquals(expResult.get(1).getInspectionResult(), result.get(1).getInspectionResult());
+        assertEquals(expResult,result);
     }
 
     /**
@@ -121,8 +115,8 @@ public class VehicleDBHandlerTest {
     public void testGetInspectionChecklistInvalidRegNumber() throws Exception {
         String regNumber = "testABCDE12345";
         VehicleDBHandler instance = new VehicleDBHandler();
-        List<InspectionInfoDTO> expResult = new ArrayList<InspectionInfoDTO>();
+        int expResult = 0;    
         List<InspectionInfoDTO> result = instance.getInspectionChecklist(regNumber);
-        assertArrayEquals(expResult.toArray(), result.toArray());
+        assertEquals(expResult,result.size());
     }
 }

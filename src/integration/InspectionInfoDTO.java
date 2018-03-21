@@ -17,7 +17,7 @@ public class InspectionInfoDTO {
     private boolean inspectionResult;
     
    /**
-    * 
+    * Instantiones 
     * @param inspectionInformation
     * @param price 
     */
@@ -30,7 +30,7 @@ public class InspectionInfoDTO {
     
     /**
      * Returns price for an inspection  
-     * @return double
+     * @return price for a particular inspection
      */
     public double getPrice(){
         return price;
@@ -38,7 +38,7 @@ public class InspectionInfoDTO {
     
    /**
     * Returns information for an inspection  
-    * @return 
+    * @return inspectionInformation details of the inspection to be performed
     */
     public String getInspectionInformation(){
         return inspectionInformation;
@@ -46,7 +46,7 @@ public class InspectionInfoDTO {
     
     /**
      * Returns result for an inspection
-     * @return 
+     * @return  inspectionResult true if inspection is passed /false if the inspection is failed
      */
     public boolean getInspectionResult(){
         return inspectionResult;
@@ -54,9 +54,26 @@ public class InspectionInfoDTO {
     
     /**
      * Set the result of the inspection
-     * @param result true/false 
+     * @param result true if inspection is passed /false if the inspection is failed
      */
     public void setInspectionResult(boolean result){
         this.inspectionResult = result;
+    }
+    
+   /**
+    * Override equals method to check if objects hold similar data.
+    * @param o
+    * @return true if all field data match. false if data does not match
+    */
+    @Override
+    public boolean equals(Object o)
+    {
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+        InspectionInfoDTO inspectionInfoDTO = (InspectionInfoDTO) o;
+        if(!inspectionInformation.equals(inspectionInfoDTO.inspectionInformation)) return false;
+        if(price != inspectionInfoDTO.price) return false;
+        if(inspectionResult != inspectionInfoDTO.inspectionResult) return false;
+        return true;
     }
 }
