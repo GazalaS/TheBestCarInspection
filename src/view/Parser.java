@@ -26,20 +26,11 @@ public class Parser {
 
     public Command getCommand() {
         String inputLine;
-        String word1 = null;
 
         printView.printInput("");
-
         inputLine = reader.nextLine();
 
-        Scanner tokanizer = new Scanner(inputLine);
-
-        if (tokanizer.hasNext()) {
-
-            word1 = tokanizer.next();
-        }
-
-        return new Command(commands.getCommandWord(word1));
+        return new Command(commands.getCommandWord(inputLine));
     }
 
     /**

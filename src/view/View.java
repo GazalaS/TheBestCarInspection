@@ -68,13 +68,6 @@ public class View {
                 startInspection();
                 break;
 
-            /*case OPEN:
-                printView.printMessage("Open the door.");
-                break;*/
-
-            /*case CLOSE:
-                printView.printMessage("Close the door.");*/
-
             case COST:
                 getInspectionCost();
                 break;
@@ -116,7 +109,7 @@ public class View {
      * Prints out welcome message
      */
 
-    public void getPrintStart() {
+    private void getPrintStart() {
 
         printView.printMessage("Welcome to THE BEST CAR INSPECTION  app");
         printView.printMessage("---------------------------------------");
@@ -126,7 +119,7 @@ public class View {
      * Prints out quit message
      */
 
-    public void getPrintExit() {
+    private void getPrintExit() {
 
         printView.printMessage("Thank for using THE BEST CAR INSPECTION app");
         printView.printMessage("-------------------------------");
@@ -136,7 +129,7 @@ public class View {
      * Prints out all valid commands
      */
 
-    public void showCommands() {
+    private void showCommands() {
 
         printView.printMessage("Available commands are: ");
         System.out.println();
@@ -213,6 +206,7 @@ public class View {
                 regNumber = null;
                 cost = 0.0;
                 cardAuthoriztion = false;
+
         } else {
             printView.printMessage("The inspection is not authorized!");
         }
