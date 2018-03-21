@@ -2,7 +2,7 @@ package view;
 import java.util.HashMap;
 
 /**
- * This class contains list of valid methods
+ * This class contains <code>{@link HashMap}</code> of valid methods from <code>{@link CommandWord}</code> enum.
  */
 
 public class CommandWords {

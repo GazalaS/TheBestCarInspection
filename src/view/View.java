@@ -6,6 +6,10 @@ import integration.ReceiptDTO;
 import java.io.IOException;
 import java.util.Date;
 
+/**
+ * <code>View</code> class is responsible for execution of the <code>operationLoop</code> method which keeps application running.
+ * It is processing commands entered by the user based on which is calling appropriate methods of the application.
+ */
 
 public class View {
 
@@ -15,6 +19,14 @@ public class View {
     private String regNumber;
     private double cost;
     private boolean cardAuthoriztion;
+
+    /**
+     * Initializes a <code>View</code> object by setting up an appropriate <code>{@link Controller}</code> reference,
+     * creating <code>{@link Parser}</code> and <code>{@link PrintView}</code> objects and creating filed that store
+     * credit card authorization status and a valid registration number.
+     * @param controller Reference to the <code>{@link Controller}</code> class created in <code>{@link startup.Main}</code>.
+     *
+     */
 
     public View (Controller controller) {
 
@@ -44,7 +56,7 @@ public class View {
     }
 
     /**
-     * Analyses the <code>Command</code> received from the user and calls appropriate function.
+     * Analyses the <code>Command</code> received from the user input and calls appropriate methods based on that input.
      *
      * @param command - command inputted by the user.
      * @return If the <code>quit</code> command is detected returns <code>true</code>, if not returns <code>false<code/>.
@@ -105,9 +117,6 @@ public class View {
         return true;
     }
 
-    /**
-     * Prints out welcome message
-     */
 
     private void getPrintStart() {
 
@@ -115,19 +124,11 @@ public class View {
         printView.printMessage("---------------------------------------");
     }
 
-    /**
-     * Prints out quit message
-     */
-
     private void getPrintExit() {
 
         printView.printMessage("Thank for using THE BEST CAR INSPECTION app");
         printView.printMessage("-------------------------------");
     }
-
-    /**
-     * Prints out all valid commands
-     */
 
     private void showCommands() {
 
@@ -138,9 +139,6 @@ public class View {
         System.out.println();
     }
 
-    /**
-     * Starts a new inspection by calling a function <code>startNewInspection()</code> in the controller
-     */
 
     private void startInspection () throws InterruptedException {
 

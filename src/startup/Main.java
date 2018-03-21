@@ -6,8 +6,17 @@ import view.View;
 
 import java.io.IOException;
 
+/**
+ * Startup class in the application, holds <code>main</code> method. Creates <code>{@link Controller}</code> and
+ * <code>{@link Controller}</code> objects.
+ */
 
 public class Main {
+
+    /**
+     * <code>Main</code> method of the application.
+     * @param args Receives command line arguments.
+     */
 
     public static void main(String[] args) {
 

@@ -5,11 +5,24 @@ import integration.CreditCardDTO;
 import java.time.YearMonth;
 import java.util.Scanner;
 
+/**
+ * <code>{@link Parser}</code> class is responsible for receiving user input and creating a <code>{@link Command}</code>
+ * object based on it. It can show all valid commands stored in <code>{@link CommandWords}</code> object, it receives
+ * registration number <code>regNumber</code>, credit card information <code>CreditCardDTO</code> and inspection results
+ * <code>inspectionResult</code> user input.
+ */
+
 public class Parser {
 
     private CommandWords commands;
     private PrintView printView;
     private Scanner reader;
+
+    /**
+     * Initializes <code>{@link Parser}</code> object. It sets references to <code>{@link PrintView}</code> and
+     * <code>{@link Scanner}</code> objects. It holds a reference to <code>{@link CommandWords}</code> object which
+     * holds list of all valid command words.
+     */
 
     public Parser () {
 

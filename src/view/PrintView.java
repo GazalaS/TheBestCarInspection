@@ -1,7 +1,8 @@
 package view;
 
 /**
- * Prints out the messages from the system and prompt
+ * <code>{@link PrintView}</code> class hold methods for user output print feedback. It also prints out
+ * input prompt with appropriate message.
  */
 
 public class PrintView {

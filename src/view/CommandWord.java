@@ -1,7 +1,7 @@
 package view;
 
 /**
- * List of valid commands that represent application functionalities
+ * <code>enum</code> of valid commands that represent application functions.
  */
 
 public enum CommandWord {
