@@ -10,10 +10,10 @@ import java.util.Date;
 public class View {
 
     private Controller controller;
-    private String regNumber;
-    private double cost;
     private Parser parser;
     private PrintView printView;
+    private String regNumber;
+    private double cost;
     private boolean cardAuthoriztion;
 
     public View (Controller controller) {
