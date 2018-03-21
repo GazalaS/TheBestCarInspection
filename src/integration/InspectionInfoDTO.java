@@ -59,4 +59,17 @@ public class InspectionInfoDTO {
     public void setInspectionResult(boolean result){
         this.inspectionResult = result;
     }
+    
+    
+    @Override
+    public boolean equals(Object o)
+    {
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+        InspectionInfoDTO inspectionInfoDTO = (InspectionInfoDTO) o;
+        if(!inspectionInformation.equals(inspectionInfoDTO.inspectionInformation)) return false;
+        if(price != inspectionInfoDTO.price) return false;
+        if(inspectionResult != inspectionInfoDTO.inspectionResult) return false;
+        return true;
+    }
 }
