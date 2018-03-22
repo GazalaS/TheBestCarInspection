@@ -68,7 +68,7 @@ public class ParserTest {
     public void getCreditCardNumberTestCorrectInput() throws IOException {
         CreditCardDTO creditCardNumber = new CreditCardDTO(1234, "SKJG122344JIF", "Nino Prekratic" ,  YearMonth.parse("2020-12"), 174);
         boolean expectedResult = true;
-        String input = "1";
+        String input = "2\n" + "nweg\n" + "1";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
         parser = new Parser();

@@ -148,6 +148,7 @@ public class View {
             controller.startNewInspection();
             regNumber = parser.getInspectionNumber();
             printView.printMessage("Your registration number is: " + regNumber);
+            printView.printMessage("Proceed with entering \"cost\" command.");
 
         } else {
             printView.printMessage("Inspection for vehicle with registration number " + regNumber + "is already under way." +
